@@ -64,3 +64,18 @@ def user_profile(request,username):
         is_followed = True
 
     return render(request, 'user_profile.html', { 'profile':profile, 'profile_details':profile_details, 'projects':projects})
+
+@login_required(login_url='/accounts/login/')
+def new_project(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = ProjectForm(request.POST,request.FILES)
+        if form.is_valid():
+            project = form.save(commit=False)
+            project.poster= current_user
+            project.save()
+        return redirect('home')
+    else:
+        form = ProjectForm()
+
+    return render(request,'new_project.html',{'form':form})
