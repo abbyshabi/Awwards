@@ -1,0 +1,12 @@
+{%extends 'base.html'%}
+{%block content%}
+<div class="row no-gutters">
+
+              {%for project in projects%}
+                 <a  href="{%url 'project' project.id%}" >
+                      <img  src="{{project.image_url.url}}" class="photography-entry img  d-flex justify-content-center align-items-center col-xs-12 img-responsive"    alt="Image" style="padding-left:35px;padding-top:35px; height: 350px;max-width: 250px;" > <br>
+                 </a>
+              {%endfor%}
+              </div>
+      
+{%endblock%}
