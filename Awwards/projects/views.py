@@ -80,18 +80,15 @@ def new_project(request):
 
     return render(request,'new_project.html',{'form':form})
 
-@login_required(login_url='/login')
-def add_usability(request, project_id):
-    project = get_object_or_404(Project, pk=project_id)
-    if request.method == 'POST':
-        form = UsabilityForm(request.POST)
-        if form.is_valid():
-            rate = form.save(commit=False)
-            rate.project = project
-            rate.user_name = request.user
-            rate.profile = request.user.profile
 
-            rate.save()
-        return redirect('home')
+def search(request):
+    if 'search' in request.GET and request.GET['search']:
+        search_term = request.GET.get('search')
+        projects = Project.search_project(search_term)
+        message = f'{search_term}'
 
-    return render(request, 'home.html')
+        return render(request, 'search.html',{'message':message, 'projects':projects})
+    else:
+        message = 'Enter term to search'
+        return render(request, 'search.html', {'message':message})
+
