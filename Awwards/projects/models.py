@@ -96,61 +96,6 @@ class Project(models.Model):
    def __str__(self):
        return self.poster
 
-class DesignRating(models.Model):
-    RATING_CHOICES = (
-        (1, '1'),
-        (2, '2'),
-        (3, '3'),
-        (4, '4'),
-        (5, '5'),
-        (6, '6'),
-        (7, '7'),
-        (8, '8'),
-        (9, '9'),
-        (10, '10')
-    )
-    project = models.ForeignKey(Project)
-    pub_date = models.DateTimeField(auto_now=True)
-    profile = models.ForeignKey(Profile)
-    rating = models.IntegerField(choices=RATING_CHOICES, default=0)
-
-
-class UsabilityRating(models.Model):
-    RATING_CHOICES = (
-        (1, '1'),
-        (2, '2'),
-        (3, '3'),
-        (4, '4'),
-        (5, '5'),
-        (6, '6'),
-        (7, '7'),
-        (8, '8'),
-        (9, '9'),
-        (10, '10')
-    )
-    project = models.ForeignKey(Project)
-    pub_date = models.DateTimeField(auto_now=True)
-    profile = models.ForeignKey(Profile)
-    rating = models.IntegerField(choices=RATING_CHOICES, default=0)
-
-
-class ContentRating(models.Model):
-    RATING_CHOICES = (
-        (1, '1'),
-        (2, '2'),
-        (3, '3'),
-        (4, '4'),
-        (5, '5'),
-        (6, '6'),
-        (7, '7'),
-        (8, '8'),
-        (9, '9'),
-        (10, '10')
-    )
-    project = models.ForeignKey(Project)
-    pub_date = models.DateTimeField(auto_now=True)
-    profile = models.ForeignKey(Profile)
-    rating = models.IntegerField(choices=RATING_CHOICES, default=0)
 
 
 class Comments(models.Model):
@@ -202,10 +147,17 @@ class Review(models.Model):
     def save_review(self):
         self.save()
 
+    def delete_comment(self):
+        Review.objects.get(id = self.id).delete()
+
     @classmethod
     def get_comment(cls, id):
         comments = Review.objects.filter(project__pk =id)
         return comments 
+    
+    def delete_review(self):
+
+        self.delete()
 
     def __str__(self):
-        return self.comment
+        return self.project
