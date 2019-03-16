@@ -9,3 +9,9 @@ from rest_framework.views import APIView
 from .serializer import ProfileSerializer,ProjectSerializer
 
 
+def index(request):
+
+    current_user = request.user
+    projects = Project.objects.order_by('-date')
+    profile = Profile.objects.order_by('-last_update')
+    return render(request,'index.html',{"projects":projects,"profile":profile})
