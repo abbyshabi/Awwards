@@ -12,4 +12,9 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = [ 'usability_rating', 'design_rating', 'content_rating','comment' ]
-        
+
+class CommentForm(forms.ModelForm):
+
+    class Meta:
+        model = Comments
+        fields = ('text',)
