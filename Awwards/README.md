@@ -11,6 +11,10 @@ DeeAwwards is an app that allows users signup, view projects by other users,rate
 * Install Django in your virtual enviroment `pip install django==1.11`
 * Run the command `pip install -r requirements.txt` to install the required dependencies
 * Run the command `python3.6 manage.py runserver` to launch the application
+## API/Endpoints
+The API endpoints will help users fetch and access data from the application.
+* https://deeawards.herokuapp.com/api/profile/
+* https://deeawards.herokuapp.com/api/project/
 ## Testing the Application
 * To run tests for the class files:
   * ` python3.6 manage.py test`
